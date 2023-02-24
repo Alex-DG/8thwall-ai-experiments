@@ -24,6 +24,7 @@ class _Layout {
   ////////////////////////////////////////////////////////////////////
 
   async asyncCall() {
+    this.toggleMenu()
     this.toggleSpinner(true)
 
     const text = this.inputText.value
