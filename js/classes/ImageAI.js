@@ -23,11 +23,17 @@ class _ImageAI {
     }
   }
 
-  async source(text) {
+  async source(text, type) {
     try {
-      const url = await DeepAiClient.stableDiffusion(text)
-      //   const url =
-      //     'https://api.deepai.org/job-view-file/d8b72724-5252-4f24-b216-35f8d9758acc/outputs/output.jpg'
+      const currentType = type || this.typeAI[0]
+
+      let url
+      switch (currentType) {
+        case this.typeAI[0]:
+          url = await DeepAiClient.stableDiffusion(text)
+          break
+      }
+
       console.log('url -> ', url)
 
       const texture = await this.loadTexture(url)
@@ -40,6 +46,8 @@ class _ImageAI {
   }
 
   init() {
+    this.typeAI = ['deepai', 'replicate']
+
     DeepAiClient.init()
 
     this.setPhoto()
